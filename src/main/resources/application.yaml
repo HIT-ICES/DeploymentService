@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Deploymentervice
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:192.168.1.104}:30336/deployment?createDatabaseIfNotExist=true&serverTimezone=CTT
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+KubeSphereConfig:
+  url: ${KUBESPHERE_URL:http://192.168.1.104:30880}
+  username: ${KUBESPHERE_USERANME:admin}
+  password: ${KUBESPHERE_PASSWORD:Admin000123}
