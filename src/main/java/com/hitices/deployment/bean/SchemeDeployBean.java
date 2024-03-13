@@ -5,21 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 /**
  * @author wangteng
  * @email willtynn@outlook.com
- * @date 2024/3/11 19:03
+ * @date 2024/3/13 15:31
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SchemeInfoBean {
+public class SchemeDeployBean {
     private Long id;
     private String name;
     private String namespace;
-    private String status;
-    private Date time;
 }

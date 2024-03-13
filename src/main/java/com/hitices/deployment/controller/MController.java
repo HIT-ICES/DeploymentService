@@ -1,6 +1,7 @@
 package com.hitices.deployment.controller;
 
 import com.hitices.deployment.bean.SchemeAddBean;
+import com.hitices.deployment.bean.SchemeDeployBean;
 import com.hitices.deployment.common.MResponse;
 import com.hitices.deployment.service.SchemeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,15 @@ public class MController {
     @PostMapping("/scheme/add")
     public MResponse addScheme(@RequestBody SchemeAddBean schemeAddBean) {
         return MResponse.successMResponse().data(schemeService.addScheme(schemeAddBean));
+    }
+
+    @PostMapping("/scheme/deploy")
+    public MResponse deployScheme(@RequestBody SchemeDeployBean schemeDeployBean) {
+        return MResponse.successMResponse().data(schemeService.deployScheme(schemeDeployBean));
+    }
+
+    @PostMapping("/scheme/deploy/callback")
+    public void deploySchemeCallback(@RequestBody MResponse response) {
+        schemeService.deploySchemeCallback(5L);
     }
 }
