@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@FeignClient(name = "InstanceService", url = "http://127.0.0.1:8081")
+@FeignClient(name = "InstanceService", url = "http://instance-service:8080")
 public interface InstanceServiceClient {
     @RequestMapping(value = "/instance/scheme/deploy", method = RequestMethod.POST)
     MResponse deployInstanceScheme(@RequestBody SchemeInstanceBean schemeInstanceBean);

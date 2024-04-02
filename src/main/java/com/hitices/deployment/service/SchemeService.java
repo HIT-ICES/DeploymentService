@@ -1,9 +1,8 @@
 package com.hitices.deployment.service;
 
 
-import com.hitices.deployment.bean.SchemeAddBean;
-import com.hitices.deployment.bean.SchemeDeployBean;
-import com.hitices.deployment.bean.SchemeInfoBean;
+import com.hitices.deployment.bean.*;
+import com.hitices.deployment.entity.SchemeEntity;
 
 import java.util.List;
 
@@ -14,5 +13,7 @@ public interface SchemeService {
 
     public String deployScheme(SchemeDeployBean schemeDeployBean);
 
-    public String deploySchemeCallback(Long id);
+    public void deploySchemeCallback(SchemeDeployCallbackBean schemeDeployCallbackBean);
+
+    public SchemeDetailBean getSchemeDetail(Long id);
 }

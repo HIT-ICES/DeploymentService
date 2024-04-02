@@ -87,16 +87,29 @@ public class SchemeServiceImpl implements SchemeService {
         }
         List<InstanceDeployBean> instanceDeployBeans = Arrays.asList(gson.fromJson(scheme.getData(), InstanceDeployBean[].class));
         instanceServiceClient.deployInstanceScheme(
-                new SchemeInstanceBean("ices104", scheme.getName(), scheme.getNamespace(), instanceDeployBeans));
+                new SchemeInstanceBean("ices104", scheme.getId(), scheme.getName(), scheme.getNamespace(), instanceDeployBeans));
         return "Success";
     }
 
     @Override
-    public String deploySchemeCallback(Long id) {
-        // todo: 部署请求的回调，检查是否成功按照要求部署
-        updateSchemeStatus(0, id);
-        System.out.println("get callback");
-        return null;
+    public void deploySchemeCallback(SchemeDeployCallbackBean schemeDeployCallbackBean) {
+        if (schemeDeployCallbackBean.getStatus() == 0){
+            // todo: 进一步对比实例状态是否正常
+            updateSchemeStatus(0, schemeDeployCallbackBean.getId());
+            System.out.println("get callback");
+        }else {
+            updateSchemeStatus(4, schemeDeployCallbackBean.getId());
+        }
+    }
+
+    @Override
+    public SchemeDetailBean getSchemeDetail(Long id) {
+        Gson gson = new Gson();
+        SchemeEntity scheme = schemeRepository.getById(id);
+        SchemeDetailBean schemeInfoBean = new SchemeDetailBean(scheme.getId(), scheme.getName(), scheme.getNamespace(),
+                StaticConfig.Status.get(scheme.getStatus()), scheme.getTime(),
+                Arrays.asList(gson.fromJson(scheme.getData(), InstanceDeployBean[].class)));
+        return schemeInfoBean;
     }
 
     public int updateSchemeStatus(Integer status, Long id){

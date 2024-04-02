@@ -102,7 +102,7 @@
         <version>${spring-boot.version}</version>
         <configuration>
           <fork>true</fork>
-          <mainClass>com.hitices.route.ApplicationMain</mainClass>
+          <mainClass>com.hitices.deployment.ApplicationMain</mainClass>
         </configuration>
         <executions>
           <execution>

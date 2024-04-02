@@ -2,6 +2,8 @@ package com.hitices.deployment.controller;
 
 import com.hitices.deployment.bean.SchemeAddBean;
 import com.hitices.deployment.bean.SchemeDeployBean;
+import com.hitices.deployment.bean.SchemeDeployCallbackBean;
+import com.hitices.deployment.bean.SchemeDetailBean;
 import com.hitices.deployment.common.MResponse;
 import com.hitices.deployment.service.SchemeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,18 @@ public class MController {
     }
 
     @PostMapping("/scheme/deploy/callback")
-    public void deploySchemeCallback(@RequestBody MResponse response) {
-        schemeService.deploySchemeCallback(5L);
+    public void deploySchemeCallback(@RequestBody SchemeDeployCallbackBean response) {
+        schemeService.deploySchemeCallback(response);
+    }
+
+    @GetMapping("/scheme/detail")
+    public MResponse getSchemeDetail(@RequestParam Long id) {
+        try {
+            SchemeDetailBean detailBean = schemeService.getSchemeDetail(id);
+            return MResponse.successMResponse().data(detailBean);
+        }catch (Exception e){
+            return MResponse.failedMResponse().data(e.getMessage());
+        }
+
     }
 }
