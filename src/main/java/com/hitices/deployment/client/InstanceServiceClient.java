@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -16,4 +17,7 @@ import java.util.concurrent.CompletableFuture;
 public interface InstanceServiceClient {
     @RequestMapping(value = "/instance/scheme/deploy", method = RequestMethod.POST)
     MResponse deployInstanceScheme(@RequestBody SchemeInstanceBean schemeInstanceBean);
+
+    @RequestMapping(value = "/instance/scheme/deploy", method = RequestMethod.GET)
+    MResponse status(@RequestParam("cluster") String cluster, @RequestParam("namespace") String namespace);
 }

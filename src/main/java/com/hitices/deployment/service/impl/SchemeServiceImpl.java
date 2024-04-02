@@ -82,7 +82,7 @@ public class SchemeServiceImpl implements SchemeService {
                 schemeRepository.findAllByNamespaceAndStatus(schemeDeployBean.getNamespace(), 2).size() > 0){
             return "Fail";
         }
-        if (updateSchemeStatus(2, schemeDeployBean.getId()) == 0){
+        if (updateSchemeStatus(StaticConfig.Running, schemeDeployBean.getId()) == 0){
             return "Fail";
         }
         List<InstanceDeployBean> instanceDeployBeans = Arrays.asList(gson.fromJson(scheme.getData(), InstanceDeployBean[].class));
@@ -93,12 +93,12 @@ public class SchemeServiceImpl implements SchemeService {
 
     @Override
     public void deploySchemeCallback(SchemeDeployCallbackBean schemeDeployCallbackBean) {
-        if (schemeDeployCallbackBean.getStatus() == 0){
+        if (schemeDeployCallbackBean.getStatus() == StaticConfig.Normal){
             // todo: 进一步对比实例状态是否正常
-            updateSchemeStatus(0, schemeDeployCallbackBean.getId());
+            updateSchemeStatus(StaticConfig.Normal, schemeDeployCallbackBean.getId());
             System.out.println("get callback");
         }else {
-            updateSchemeStatus(4, schemeDeployCallbackBean.getId());
+            updateSchemeStatus(StaticConfig.Fail, schemeDeployCallbackBean.getId());
         }
     }
 

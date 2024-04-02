@@ -5,6 +5,7 @@ import com.hitices.deployment.bean.SchemeDeployBean;
 import com.hitices.deployment.bean.SchemeDeployCallbackBean;
 import com.hitices.deployment.bean.SchemeDetailBean;
 import com.hitices.deployment.common.MResponse;
+import com.hitices.deployment.service.InstanceMointor;
 import com.hitices.deployment.service.SchemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,13 @@ public class MController {
         }catch (Exception e){
             return MResponse.failedMResponse().data(e.getMessage());
         }
+    }
 
+    @Autowired
+    private InstanceMointor instanceMointor;
+
+    @GetMapping("/scheme/test")
+    public void test(){
+        instanceMointor.mointor();
     }
 }

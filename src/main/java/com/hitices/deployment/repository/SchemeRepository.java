@@ -26,4 +26,6 @@ public interface SchemeRepository extends JpaRepository<SchemeEntity, Long> {
     List<SchemeEntity> findAllByNameContainingIgnoreCaseAndNamespaceOrderByStatusAsc(String name, String namespace);
 
     List<SchemeEntity> findAllByNamespaceAndStatus(String namespace, int status);
+
+    List<SchemeEntity> findAllByStatus(int status);
 }
